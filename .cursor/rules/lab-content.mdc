@@ -1,0 +1,31 @@
+---
+description: Lab page copy structure for /demos/*
+globs: src/app/demos/**/*
+alwaysApply: false
+---
+
+# Lab Content
+
+## Section order
+Shell badge → Why → Live Demo → How → Trade-offs → Verify
+
+## Language
+v1 copy: **Korean only** (DECISIONS #5). Separate from main i18n.
+
+## Rules
+- Why: strategy rationale, no code required to understand
+- How: this repo's implementation, not generic theory
+- Verify: reproducible steps (View Source / Network / refresh)
+- NO empty placeholder — min 1 real sentence or `TBD: reason`
+
+## Data
+`portfolioMetrics` SSOT, must match `App.tsx` Stats. Same data across SSR/SSG/ISR/CSR/charts.
+
+## Per-page verify target
+| route | proof |
+| `/demos/ssr` | metrics+timestamp in View Source |
+| `/demos/ssg` | `builtAt` unchanged until redeploy |
+| `/demos/isr` | `regeneratedAt` changes after 60s |
+| `/demos/csr` | no chart data in View Source; API in Network |
+| `/demos/charts` | Recharts x2, `dynamic(ssr: false)` |
+| `/demos/3d` | R3F 1 scene; 2D fallback on reduced-motion/WebGL fail |

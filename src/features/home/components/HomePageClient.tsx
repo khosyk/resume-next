@@ -19,254 +19,42 @@ import {
 	CheckCircle2,
 	ChevronRight,
 	BrainCircuit,
-	Users,
 	Award,
 	ArrowUp,
 } from "lucide-react";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
-import { buildPortfolioProjects } from "./domain/project/model/projects";
-import { ProjectCard } from "./domain/project/ui/ProjectCard";
-import { fadeIn, staggerContainer } from "./shared/lib/motion";
-import { ContactModal } from "./shared/ui/ContactModal";
-import { ExperienceItem } from "./shared/ui/ExperienceItem";
-import { MindsetItem } from "./shared/ui/MindsetItem";
-import { StatItem } from "./shared/ui/StatItem";
-import { TechCategory } from "./shared/ui/TechCategory";
+import { buildPortfolioProjects } from "@/domain/project/model/projects";
+import { ProjectCard } from "@/domain/project/ui/ProjectCard";
+import { fadeIn, staggerContainer } from "@/shared/lib/motion";
+import { ContactModal } from "@/shared/ui/ContactModal";
+import { ExperienceItem } from "@/shared/ui/ExperienceItem";
+import { StatItem } from "@/shared/ui/StatItem";
+import { TechCategory } from "@/shared/ui/TechCategory";
+import { getDictionary, type Lang } from "@/shared/i18n";
+import { WorkEthicSection } from "@/features/home/components/WorkEthicSection";
+
+interface HomePageClientProps {
+	lang: Lang;
+}
 
 const WEB_SUMMARY_CWS_URL =
 	"https://chromewebstore.google.com/detail/lofcjofakipgchbnkdiliafakccnbhbo";
 
-export default function App() {
+export function HomePageClient({ lang }: HomePageClientProps) {
 	const [scrolled, setScrolled] = useState(false);
 	const [activeTab, setActiveTab] = useState("All");
-	const [lang, setLang] = useState<"ko" | "en">("ko");
 	const [contactOpen, setContactOpen] = useState(false);
 	const [showMobileScrollArrow, setShowMobileScrollArrow] = useState(false);
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
-	const workEthicRef = useRef<HTMLDivElement>(null);
 	const web3formsAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
-	const t = {
-		ko: {
-			nav: {
-				profile: "프로필",
-				impact: "성과",
-				stack: "기술",
-				projects: "프로젝트",
-				career: "경력",
-				lab: "Lab",
-				contact: "연락하기",
-			},
-			hero: {
-				badge: "성능 최적화 전문가",
-				title1: "55만 유저의",
-				title2: "안정성을 설계하는 해결사.",
-				desc: "복잡한 비즈니스 요구사항을 정교한 기술 스펙으로 번역하여 최적의 비용으로 구현해내는 프론트엔드 엔지니어 이희운입니다.",
-				resume: "이력서",
-				coverLetter: "자기소개서",
-				webSummary: "Web Summary",
-				lab: "Technical Lab",
-				summaryTitle: "전문가 요약",
-				summaryDesc:
-					'"최고의 공부는 실전이다"라는 신념 아래, Cursor 및 MCP 등 차세대 AI 도구를 활용한 워크플로우 혁신으로 Swift 네이티브 프레임워크를 단기 습득하여 하드웨어 진단 로직을 구현하는 등 플랫폼의 경계를 넘나드는 압도적 생산성을 증명합니다.',
-				summaryPoint1: "비정상 종료율 99% 개선 경험",
-				summaryPoint2: "AI 기반 워크플로우 혁신 주도",
-				summaryPoint3: "비즈니스-기술 브릿지 역할 수행",
-			},
-			stats: {
-				stability: "서비스 안정성",
-				performance: "UX 퍼포먼스",
-				productivity: "개발 생산성",
-				efficiency: "운영 효율성",
-				stabilityDesc: "Crashlytics 기반 에러 추적 및 리팩토링",
-				performanceDesc: "Reanimated 기반 인터랙션 최적화",
-				productivityDesc: "Atomic Design 기반 컴포넌트 추상화",
-				efficiencyDesc: "RBAC 시스템 구축 및 QA 통과율 달성",
-			},
-			tech: {
-				title: "핵심 기술 스택",
-				desc: "React·React Native·TypeScript부터 네이티브·Firebase, AI 생산성 도구까지 리포트에 정리한 스택을 중심으로 서비스를 설계합니다.",
-				cat1: "프론트엔드 & 상태관리",
-				cat2: "네이티브 & 인프라",
-				cat3: "AI & 생산성",
-				cat4: "특화 기술",
-				labTitle: "Engineering Lab",
-				labDesc: "Next.js SSR · Recharts · 3D — Lab에서 렌더링 전략·시각화 데모",
-				labLink: "Lab 보기 →",
-			},
-			projects: {
-				title: "주요 프로젝트",
-				desc: "실제 비즈니스 가치를 창출한 핵심 프로젝트 경험입니다.",
-				achievements: "핵심 성과",
-				problem: "문제",
-				thinking: "사고",
-				result: "결과",
-				swipeHint: "스크롤",
-				cats: ["전체", "앱", "웹", "네이티브/PWA", "확장"],
-			},
-			mindset: {
-				title: "Work Ethic",
-				m1Title: "사용자 중심의 사고",
-				m1Desc:
-					"단순한 기능 구현을 넘어, 실제 사용자가 겪는 불편함을 데이터와 피드백으로 분석하여 최적의 UX를 설계합니다.",
-				m2Title: "지속 가능한 코드",
-				m2Desc:
-					"팀원 누구나 이해할 수 있는 클린 코드를 지향하며, 유지보수가 용이하고 확장성 있는 아키텍처를 고민합니다.",
-				m3Title: "능동적인 문제 해결",
-				m3Desc:
-					"기술적 한계에 부딪혔을 때 포기하지 않고, 다양한 대안을 제시하며 비즈니스 목표 달성을 위한 최선의 경로를 찾습니다.",
-				m4Title: "철저한 서비스 안정성",
-				m4Desc:
-					"장애 발생 가능성을 사전에 차단하기 위해 꼼꼼한 테스트와 모니터링을 생활화하며, 안정적인 서비스 운영을 최우선으로 합니다.",
-			},
-			career: {
-				title: "경력",
-				edu: "학력 및 기타",
-				connecti: "가입자 55만·MAU 10만 규모 '열달후에' 앱 개발·성능·안정성 개선",
-				biskit: "패스룸 케어 앱 및 운영 어드민(RBAC·엑셀 연동 등) 개발",
-				univ: "글로벌 비즈니스학과 졸업",
-				exchange:
-					"대만 Ming Chuan University 교환학생(1년) — 글로벌 서비스에 필요한 적응력·유연한 사고",
-				globalTitle: "글로벌 역량",
-				globalDesc:
-					"비즈니스 영어 커뮤니케이션과 글로벌 버전 기능 구현·유지보수를 전담할 수 있는 역량을 갖추고 있습니다.",
-				extraTitle: "성실성 및 책임감",
-				extraDesc:
-					"30사단 훈련소 훈련 성적 전체 2등(500명 중) 수료, 사단장 표창. 맡은 환경에서 성과를 내는 책임감을 증명했습니다.",
-			},
-			footer: {
-				built: "이희운이 디자인하고 구축함 © 2026",
-			},
-			contactModal: {
-				title: "연락하기",
-				nameLabel: "이름",
-				emailLabel: "이메일",
-				messageLabel: "내용",
-				submit: "보내기",
-				sending: "전송 중…",
-				sent: "메시지가 전송되었습니다. 확인 후 답장 드리겠습니다.",
-				sendError:
-					"전송에 실패했습니다. 잠시 후 다시 시도하거나 hosy12@gmail.com 으로 직접 메일 주세요.",
-				close: "닫기",
-				validation: "이름·이메일·내용을 모두 입력하고, 이메일 형식을 확인해 주세요.",
-			},
-		},
-		en: {
-			nav: {
-				profile: "Profile",
-				impact: "Impact",
-				stack: "Stack",
-				projects: "Projects",
-				career: "Career",
-				lab: "Lab",
-				contact: "Contact",
-			},
-			hero: {
-				badge: "PERFORMANCE OPTIMIZATION EXPERT",
-				title1: "Architecting Stability",
-				title2: "for 550K Users.",
-				desc: "I am Heeun Lee, a frontend engineer who translates complex business requirements into sophisticated technical specifications, delivering optimal value.",
-				webSummary: "Web Summary",
-				lab: "Technical Lab",
-				summaryTitle: "Professional Summary",
-				summaryDesc:
-					"With a 'learning by doing' mindset, I demonstrate overwhelming productivity across platforms—such as quickly mastering Swift to implement hardware diagnostics through AI-driven workflow innovations like Cursor and MCP.",
-				summaryPoint1: "99% Crash Rate Improvement",
-				summaryPoint2: "AI-Driven Workflow Innovation",
-				summaryPoint3: "Business-Tech Bridge Role",
-			},
-			stats: {
-				stability: "Service Stability",
-				performance: "UX Performance",
-				productivity: "Development Productivity",
-				efficiency: "Operational Efficiency",
-				stabilityDesc: "Crashlytics-based error tracking & refactoring",
-				performanceDesc: "Reanimated-based interaction optimization",
-				productivityDesc: "Atomic Design-based component abstraction",
-				efficiencyDesc: "RBAC system & 100% QA pass rate",
-			},
-			tech: {
-				title: "Core Tech Stacks",
-				desc: "From frontend core to native integration, infra, and AI tools, I hold a stack that transcends platform boundaries.",
-				cat1: "Frontend & State",
-				cat2: "Native & Infra",
-				cat3: "AI & Productivity",
-				cat4: "Specialized Skills",
-				labTitle: "Engineering Lab",
-				labDesc: "Next.js SSR · Recharts · 3D — rendering & visualization demos in Lab",
-				labLink: "View Lab →",
-			},
-			projects: {
-				title: "Featured Projects",
-				desc: "Key project experiences that created real business value.",
-				achievements: "Key Achievements",
-				problem: "Problem",
-				thinking: "Thinking",
-				result: "Result",
-				swipeHint: "SCROLL",
-				cats: ["All", "App", "Web", "Native/PWA", "Extension"],
-			},
-			mindset: {
-				title: "Work Ethic",
-				m1Title: "User-Centric Thinking",
-				m1Desc:
-					"Beyond simple implementation, I analyze user pain points with data and feedback to design the optimal UX.",
-				m2Title: "Sustainable Code",
-				m2Desc:
-					"I aim for clean code that any team member can understand, focusing on maintainable and scalable architecture.",
-				m3Title: "Proactive Problem Solving",
-				m3Desc:
-					"I don't give up when facing technical limits; I propose various alternatives to find the best path for business goals.",
-				m4Title: "Uncompromising Stability",
-				m4Desc:
-					"I prioritize stable service operation by making thorough testing and monitoring a habit to prevent potential failures.",
-			},
-			career: {
-				title: "Career",
-				edu: "Education & More",
-				connecti:
-					"Yeoldal app (550K signups, 100K MAU): development, performance, and stability",
-				biskit: "Pet IoT app and ops admin (RBAC, Excel integration, etc.)",
-				univ: "B.A. in Global Business",
-				exchange:
-					"Exchange at Ming Chuan University, Taiwan (1 year)—adaptability for global services",
-				globalTitle: "Global competence",
-				globalDesc:
-					"Business English and ownership of global-version features and maintenance.",
-				extraTitle: "Diligence & responsibility",
-				extraDesc:
-					"2nd of 500 at 30th Division training; brigade commander's commendation.",
-			},
-			footer: {
-				built: "Designed & Built by Heeun Lee © 2026",
-			},
-			contactModal: {
-				title: "Contact",
-				nameLabel: "Name",
-				emailLabel: "Email",
-				messageLabel: "Message",
-				submit: "Send",
-				sending: "Sending…",
-				sent: "Your message was sent. I will get back to you soon.",
-				sendError:
-					"Could not send. Please try again later or email hosy12@gmail.com directly.",
-				close: "Close",
-				validation: "Please fill in all fields and use a valid email address.",
-			},
-		},
-	}[lang];
+	const t = getDictionary(lang);
 
 	const { scrollY } = useScroll();
-	const { scrollYProgress: workEthicProgress } = useScroll({
-		target: workEthicRef,
-		offset: ["start end", "end start"],
-	});
 
 	const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
 	const y2 = useTransform(scrollY, [0, 1000], [0, -150]);
-	const xWork = useTransform(workEthicProgress, [0, 1], [-200, 200]);
-	const xEthic = useTransform(workEthicProgress, [0, 1], [200, -200]);
 
 	useEffect(() => {
 		const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -410,30 +198,36 @@ export default function App() {
 						</Link>
 					</div>
 					<div className="flex items-center gap-4">
-						<button
-							type="button"
-							onClick={() => setLang(lang === "ko" ? "en" : "ko")}
-							className="flex items-center gap-0.5 text-[11px] font-black tracking-widest rounded px-1.5 py-1 hover:opacity-90 transition-opacity cursor-pointer"
+						<div
+							className="flex items-center gap-0.5 text-[11px] font-black tracking-widest rounded px-1.5 py-1"
 							aria-label={lang === "ko" ? "Switch to English" : "한국어로 전환"}
 						>
-							<span
+							<Link
+								href="/ko"
+								prefetch
 								className={
-									lang === "ko" ? "text-brand-primary" : "text-brand-secondary/22"
+									lang === "ko"
+										? "text-brand-primary"
+										: "text-brand-secondary/22 hover:text-brand-primary transition-colors"
 								}
 							>
 								KR
-							</span>
+							</Link>
 							<span className="text-brand-secondary/18 select-none" aria-hidden>
 								/
 							</span>
-							<span
+							<Link
+								href="/en"
+								prefetch
 								className={
-									lang === "en" ? "text-brand-primary" : "text-brand-secondary/22"
+									lang === "en"
+										? "text-brand-primary"
+										: "text-brand-secondary/22 hover:text-brand-primary transition-colors"
 								}
 							>
 								EN
-							</span>
-						</button>
+							</Link>
+						</div>
 						<button
 							type="button"
 							onClick={() => setContactOpen(true)}
@@ -907,71 +701,7 @@ export default function App() {
 					</div>
 				</section>
 
-				{/* Work Ethic Section */}
-				<section
-					ref={workEthicRef}
-					className="py-32 px-6 bg-brand-surface/30 relative overflow-hidden"
-				>
-					{/* Background Decorative Text */}
-					<div className="absolute inset-0 flex flex-col justify-between py-10 pointer-events-none select-none overflow-hidden">
-						<motion.div
-							style={{ x: xWork, opacity: 0.02 }}
-							className="text-[25vw] font-black leading-none"
-						>
-							WORK
-						</motion.div>
-						<motion.div
-							style={{ x: xEthic, opacity: 0.02 }}
-							className="text-[25vw] font-black leading-none self-end"
-						>
-							ETHIC
-						</motion.div>
-					</div>
-
-					<div className="max-w-7xl mx-auto relative z-10">
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							className="text-center mb-24"
-						>
-							<h2 className="text-5xl font-black tracking-tighter uppercase mb-4">
-								{t.mindset.title}
-							</h2>
-							<div className="w-20 h-1.5 bg-brand-accent mx-auto rounded-full" />
-						</motion.div>
-
-						<motion.div
-							initial="initial"
-							whileInView="animate"
-							viewport={{ once: true, margin: "-100px" }}
-							variants={staggerContainer}
-							className="grid md:grid-cols-1 lg:grid-cols-3 gap-8"
-						>
-							<motion.div variants={fadeIn} className="h-full">
-								<MindsetItem
-									icon={<Zap size={32} />}
-									title={t.mindset.m1Title}
-									desc={t.mindset.m1Desc}
-								/>
-							</motion.div>
-							<motion.div variants={fadeIn} className="h-full">
-								<MindsetItem
-									icon={<Users size={32} />}
-									title={t.mindset.m2Title}
-									desc={t.mindset.m2Desc}
-								/>
-							</motion.div>
-							<motion.div variants={fadeIn} className="h-full">
-								<MindsetItem
-									icon={<BrainCircuit size={32} />}
-									title={t.mindset.m3Title}
-									desc={t.mindset.m3Desc}
-								/>
-							</motion.div>
-						</motion.div>
-					</div>
-				</section>
+				<WorkEthicSection mindset={t.mindset} />
 
 				{/* Experience & Education */}
 				<section id="career" className="py-24 px-6 bg-brand-primary text-white">

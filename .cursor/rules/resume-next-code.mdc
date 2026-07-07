@@ -1,0 +1,33 @@
+---
+description: TS/React conventions for src/
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Code
+
+## Layout
+`src/app` routes · `src/features` features · `src/domain` domain · `src/shared` shared
+import `@/*` · Lab path `src/app/demos/` · Lab shell `DemoPageShell`
+
+## Component
+- `const` FC, no `React.FC`
+- `interface` props: required first, optional `?` last
+- no `any`, strict TS
+- `"use client"` only if hooks/interaction
+
+## Style
+Tailwind `brand-*` from `globals.css` @theme
+
+## Lab render
+| page | mode |
+| SSR/SSG/ISR | Server Component default |
+| Charts/3D | `dynamic(ssr: false)` |
+| CSR | `/api/metrics` + skeleton (placeholder if missing) |
+| ISR | `export const revalidate = 60` |
+
+## Done
+`yarn` only · finish with `yarn verify` · no-console warn (scripts exempt)
+
+## DO NOT
+v2 features · commit `.env` · expose Web3Forms key · unrelated edits

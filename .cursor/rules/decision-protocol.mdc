@@ -1,0 +1,34 @@
+---
+description: 9+ score gate. Fact-only decisions.
+alwaysApply: true
+---
+
+# Decision Gate
+
+SCORE < 9/10 → REJECT. Compare 1-2 alternatives → re-score → adopt only 9+.
+
+Before adopt, answer:
+1. Fact evidence for 9+?
+2. Counter-argument?
+3. Simpler alternative?
+
+## Valid evidence
+- grep/read confirms file exists in `src/`
+- `docs/DECISIONS.md` adopted row
+- change likely passes `yarn verify`
+
+## Invalid evidence
+- memory, assumption, other-project patterns
+
+## Naming
+- doc vs code mismatch → use code name (`DemoPageShell` not `DemoPageLayout`)
+- label current vs target (Web3Forms: now client, Week4 server)
+
+## v1 IN
+`/`, Lab ko copy, Recharts only, R3F+2D fallback, `portfolioMetrics` single source
+
+## v1 OUT
+Admin/Auth, ECharts, `/ko` `/en` routes, webhook revalidate
+
+## On new 9+ decision
+Append 1 row to `docs/DECISIONS.md` (score + reason)

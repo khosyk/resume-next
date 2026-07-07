@@ -24,6 +24,10 @@
 }
 
 @layer base {
+	html {
+		position: relative;
+	}
+
 	body {
 		@apply font-sans bg-brand-bg text-brand-primary antialiased select-none;
 	}

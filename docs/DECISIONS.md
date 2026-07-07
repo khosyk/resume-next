@@ -16,6 +16,9 @@
 | 8   | Contact: Server Action + Route Handler (v1 Week 4)                 | 9.0  | Web3Forms 키 서버화, FE 포지션에 적합한 서버 깊이             |
 | 9   | 3D: R3F + `dynamic(ssr: false)` + 2D fallback                      | 9.0  | WebGL CSR island + 접근성·저사양 대응                         |
 | 10  | 차트 v1: **Recharts만** (2종)                                      | 9.0  | RN/eCharts 경험과 연결 가능, 번들·학습 비용 최소              |
+| 11  | Lab canonical URL: **`/demos/*`**                                  | 9.0  | DECISIONS·docs·Nav 링크·`routes.ts` 일치. `app/demos/` 사용   |
+| 12  | Agent Rules: **`.cursor/rules/*.mdc`**                             | 9.5  | 9점 게이트·할루시네이션 방지·코드/Lab 컨벤션 Cursor 자동 참조 |
+| 13  | 루트 i18n: **`/ko` · `/en` SSG** + Link 전환                       | 9.5  | lang별 정적 HTML·prefetch 네비·Client islands( motion/modal ) |
 
 ## 보류 (v2)
 
@@ -23,20 +26,20 @@
 | ----------------------------------- | ---- | ---------------------------------------------------- |
 | Admin + Auth.js + Turso             | 7.0  | v1 목표(렌더링·시각화 어필) 대비 구현·설명 부담 과大 |
 | ECharts + Chart.js 동시 비교        | 7.5  | Recharts 2개로 “시각화 역량”은 충분                  |
-| `/ko` `/en` URL 라우트              | 7.5  | 메인 Client toggle로 v1 충분, SEO Lab은 v1.5         |
+| `/ko` `/en` URL 라우트              | 7.5  | **v1 채택으로 승격** (#13) — 메인 Client toggle 대체 |
 | GitHub webhook on-demand revalidate | 7.0  | ISR 60s 데모로 개념 증명 가능                        |
 
 ## 사용자 결정 필요 (애매)
 
 아래는 self-feedback 후 **9점 미만** 또는 **선호에 따라 갈림**. 진행 전 확인 권장.
 
-| #   | 질문                         | 옵션 A                                        | 옵션 B                               | 비고                                                |
-| --- | ---------------------------- | --------------------------------------------- | ------------------------------------ | --------------------------------------------------- |
-| U1  | Week 1에서 `/` SSR 분리 시점 | A) v1 Week 1은 Client 통째 이전 후 Week 4 SSR | B) Week 1부터 Hero·Stats Server 분리 | A=9.0(속도), B=8.5(리스크) → **현재 계획은 A 채택** |
+| #   | 질문                         | 옵션 A                                        | 옵션 B                               | 비고                                                  |
+| --- | ---------------------------- | --------------------------------------------- | ------------------------------------ | ----------------------------------------------------- |
+| U1  | Week 1에서 `/` SSR 분리 시점 | A) v1 Week 1은 Client 통째 이전 후 Week 4 SSR | B) Week 1부터 Hero·Stats Server 분리 | **C) `/ko` `/en` SSG + Client islands ✅ 채택** (9.0) |
 | U2  | Lab 네비 라벨                | **`Lab` ✅ 사용자 확정**                      |
 | U3  | v1.5 `/projects/[slug]` SSG  | Week 4 이후 v1.5                              |
 | U4  | 차트 라이브러리              | **Recharts ✅** (ECharts v2 보류)             |
 
 ---
 
-**마지막 갱신:** 2026-07-01 · 브랜치 `feat/demo-hub-nextjs`
+**마지막 갱신:** 2026-07-04 · 브랜치 `feat/lab-content`

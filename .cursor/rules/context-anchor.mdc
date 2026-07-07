@@ -1,0 +1,37 @@
+---
+description: Anti-hallucination. Source priority. Path truth.
+alwaysApply: true
+---
+
+# Context
+
+## Read order (before edit)
+1. `docs/DECISIONS.md`
+2. `docs/TODO.md`
+3. target files in `src/` (grep/read)
+
+## Source priority (conflict)
+`src/` > DECISIONS > TODO > DEMO_HUB_PLAN > README
+
+## Paths
+- canonical Lab URL: `/demos/*`
+- folder: `src/app/demos/`
+- nav SSOT: `src/features/demos/config/routes.ts`
+- MUST match: `routes.ts` href = `app/demos/` folder = hardcoded Links
+
+Route change order: `routes.ts` → page → nav
+
+## Existence
+grep/read before import. Missing → say "not implemented", do not invent.
+
+## Metrics
+numbers only from `App.tsx` Stats or `portfolioMetrics.ts`
+
+## Git
+commit/push ONLY on user request. pre-commit: lint-staged.
+
+## Rule priority
+`.cursor/rules` > user_rules (RN etc.)
+
+## Session header (3 lines)
+branch / phase / this change
