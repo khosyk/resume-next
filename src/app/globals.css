@@ -21,6 +21,29 @@
 	--color-brand-bg: #ffffff;
 	--color-brand-surface: #f5f5f5;
 	--color-brand-border: #eaeaea;
+
+	--animate-fade-up: fade-up 0.6s ease-out both;
+	--animate-tech-shimmer: tech-shimmer 1.2s linear infinite;
+
+	@keyframes fade-up {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes tech-shimmer {
+		from {
+			transform: translateX(-150%) skewX(-20deg);
+		}
+		to {
+			transform: translateX(250%) skewX(-20deg);
+		}
+	}
 }
 
 @layer base {

@@ -1,13 +1,13 @@
 ---
-description: Lab page copy structure for /demos/*
-globs: src/app/demos/**/*
+description: Lab page copy structure for /lab/*
+globs: src/app/lab/**/*
 alwaysApply: false
 ---
 
 # Lab Content
 
 ## Section order
-Shell badge → Why → Live Demo → How → Trade-offs → Verify
+Shell badge → Why → Live Lab → How → Trade-offs → Verify
 
 ## Language
 v1 copy: **Korean only** (DECISIONS #5). Separate from main i18n.
@@ -19,13 +19,13 @@ v1 copy: **Korean only** (DECISIONS #5). Separate from main i18n.
 - NO empty placeholder — min 1 real sentence or `TBD: reason`
 
 ## Data
-`portfolioMetrics` SSOT, must match `App.tsx` Stats. Same data across SSR/SSG/ISR/CSR/charts.
+`lib/data/portfolio-metrics.ts` SSOT, must match `StatsSection`. Same data across SSR/SSG/ISR/CSR/charts.
 
 ## Per-page verify target
 | route | proof |
-| `/demos/ssr` | metrics+timestamp in View Source |
-| `/demos/ssg` | `builtAt` unchanged until redeploy |
-| `/demos/isr` | `regeneratedAt` changes after 60s |
-| `/demos/csr` | no chart data in View Source; API in Network |
-| `/demos/charts` | Recharts x2, `dynamic(ssr: false)` |
-| `/demos/3d` | R3F 1 scene; 2D fallback on reduced-motion/WebGL fail |
+| `/lab/ssr` | metrics+timestamp in View Source |
+| `/lab/ssg` | `builtAt` unchanged until redeploy |
+| `/lab/isr` | `regeneratedAt` changes after 60s |
+| `/lab/csr` | no chart data in View Source; API in Network |
+| `/lab/charts` | Recharts x2, `dynamic(ssr: false)` |
+| `/lab/3d` | R3F 1 scene; 2D fallback on reduced-motion/WebGL fail |

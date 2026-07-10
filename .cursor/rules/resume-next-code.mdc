@@ -6,9 +6,11 @@ alwaysApply: false
 
 # Code
 
-## Layout
-`src/app` routes · `src/features` features · `src/domain` domain · `src/shared` shared
-import `@/*` · Lab path `src/app/demos/` · Lab shell `DemoPageShell`
+## Layout (Next.js App Router)
+`src/app` routes · route colocation `app/*/_components` `app/*/_lib`
+shared UI `src/components` · data/i18n/utils `src/lib`
+import `@/*` · Lab nav SSOT `app/lab/_lib/routes.ts` · Lab shell `LabPageShell`
+SSOT: `docs/ARCHITECTURE.md`
 
 ## Component
 - `const` FC, no `React.FC`

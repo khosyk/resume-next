@@ -7,17 +7,18 @@ alwaysApply: true
 
 ## Read order (before edit)
 1. `docs/DECISIONS.md`
-2. `docs/TODO.md`
-3. target files in `src/` (grep/read)
+2. `docs/ARCHITECTURE.md`
+3. `docs/TODO.md`
+4. target files in `src/` (grep/read)
 
 ## Source priority (conflict)
-`src/` > DECISIONS > TODO > DEMO_HUB_PLAN > README
+`src/` > DECISIONS > ARCHITECTURE > TODO > LAB_PLAN > README
 
 ## Paths
-- canonical Lab URL: `/demos/*`
-- folder: `src/app/demos/`
-- nav SSOT: `src/features/demos/config/routes.ts`
-- MUST match: `routes.ts` href = `app/demos/` folder = hardcoded Links
+- canonical Lab URL: `/lab/*`
+- folder: `src/app/lab/`
+- nav SSOT: `src/app/lab/_lib/routes.ts`
+- MUST match: `routes.ts` href = `app/lab/` folder = hardcoded Links
 
 Route change order: `routes.ts` → page → nav
 
@@ -25,7 +26,7 @@ Route change order: `routes.ts` → page → nav
 grep/read before import. Missing → say "not implemented", do not invent.
 
 ## Metrics
-numbers only from `App.tsx` Stats or `portfolioMetrics.ts`
+numbers only from `lib/data/portfolio-metrics.ts` or `StatsSection` (until metrics file exists)
 
 ## Git
 commit/push ONLY on user request. pre-commit: lint-staged.

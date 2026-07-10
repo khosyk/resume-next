@@ -4,16 +4,17 @@
 
 ## 🔬 Engineering Lab (진행 중)
 
-Next.js Demo Hub 마이그레이션은 `feat/demo-hub-nextjs` 브랜치에서 진행합니다.
+Next.js Engineering Lab 마이그레이션은 `feat/demo-hub-nextjs` 브랜치에서 진행합니다.
 
 - 메인 `/` — 이력서·경력기술서 (현행 유지)
-- `/demos` — SSR · SSG · ISR · CSR · Charts · 3D 어필 Lab
+- `/lab` — SSR · SSG · ISR · CSR · Charts · 3D 어필 Lab
 
-| 문서                                     | 설명                                  |
-| ---------------------------------------- | ------------------------------------- |
-| [Demo Hub 계획](./docs/DEMO_HUB_PLAN.md) | 사이트맵, 페이지별 Why/How, 폴더 구조 |
-| [구현 TODO](./docs/TODO.md)              | 주차별 체크리스트                     |
-| [의사결정 로그](./docs/DECISIONS.md)     | 9점+ 기준 채택·보류·사용자 확인 항목  |
+| 문서                                 | 설명                                    |
+| ------------------------------------ | --------------------------------------- |
+| [아키텍처](./docs/ARCHITECTURE.md)   | Next.js colocation, `components`, `lib` |
+| [Lab 계획](./docs/LAB_PLAN.md)       | 사이트맵, 페이지별 Why/How              |
+| [구현 TODO](./docs/TODO.md)          | 주차별 체크리스트                       |
+| [의사결정 로그](./docs/DECISIONS.md) | 9점+ 기준 채택·보류·사용자 확인 항목    |
 
 ## 🚀 기술 스펙 (Technical Stack)
 
@@ -35,12 +36,12 @@ Next.js Demo Hub 마이그레이션은 `feat/demo-hub-nextjs` 브랜치에서 �
 
 이 포트폴리오의 기술 선택은 "화려한 도구 나열"보다, 실제 서비스에서 중요한 세 가지를 전달하기 위해 구성했습니다.
 
-### React + Vite를 선택한 이유 (vs HTML/CSS only)
+### React + Next.js를 선택한 이유 (vs HTML/CSS only)
 
 - **초기 제작 속도만** 보면 HTML/CSS가 더 빠를 수 있습니다.
-- 하지만 이 포트폴리오는 언어 토글, 프로젝트 필터/모달, 스크롤 인터랙션처럼 **상태와 상호작용**이 많아 React가 유지보수에 유리합니다.
+- 하지만 이 포트폴리오는 언어 전환, 프로젝트 필터/모달, 스크롤 인터랙션처럼 **상태와 상호작용**이 많아 React가 유지보수에 유리합니다.
 - 프로젝트/성과 콘텐츠를 데이터로 관리해 **반복 UI 수정 비용**을 낮추고, 컴포넌트 재사용성을 확보했습니다.
-- Vite를 통해 빠른 dev server/HMR로 수정-검증 루프를 짧게 유지해 **지속 개선**에 최적화했습니다.
+- Next.js App Router로 **SSG(`/ko`·`/en`) + Lab 렌더링 데모**를 한 코드베이스에서 운영합니다.
 
 ### 1) 왜 이 스택을 선택했는가 (Why This Stack)
 
@@ -48,9 +49,9 @@ Next.js Demo Hub 마이그레이션은 `feat/demo-hub-nextjs` 브랜치에서 �
   화면 구현 속도와 타입 안정성을 동시에 가져가기 위한 기본 축입니다.  
   이력서 성격상 잦은 콘텐츠 수정이 필요하므로, 변경 비용을 줄이는 타입 기반 구조를 우선했습니다.
 
-- **Vite**  
-  빠른 부팅/빌드로 수정-검증 루프를 짧게 유지하기 위해 선택했습니다.  
-  "작게 자주 개선"하는 포트폴리오 운영 방식과 잘 맞습니다.
+- **Next.js 15 (App Router)**  
+  메인은 `/ko`·`/en` SSG, Lab은 SSR/SSG/ISR/CSR 비교 데모로 **렌더링 전략을 코드로 증명**하기 위해 선택했습니다.  
+  Server Component 기본 + Client islands 패턴으로 SEO와 인터랙션을 분리합니다.
 
 - **Tailwind CSS**  
   디자인 토큰을 빠르게 조합하고, 반응형 레이아웃을 일관되게 유지하기 위해 사용했습니다.  
@@ -79,52 +80,20 @@ Next.js Demo Hub 마이그레이션은 `feat/demo-hub-nextjs` 브랜치에서 �
 - **홍보용**  
   경력 소개를 스택-성과-문제해결 흐름으로 연결해, "무엇을 했는지"보다 "왜 잘하는지"가 보이도록 구성했습니다.
 
-**FSD vs Atomic:** FSD는 **기능·도메인·의존 방향**이 축이고, Atomic은 **UI 조각 크기**가 충이다. 서로 배타가 아니라 `shared/ui` 안을 Atomic 규칙으로 쓰는 식으로 **병행**하기도 한다.
+**Next.js App Router** — [공식 Project Structure](https://nextjs.org/docs/app/getting-started/project-structure) 기준으로 `app/` 라우팅 + colocation + `components/` + `lib/` 를 사용한다.
 
-### 실제 소스 폴더 구조 (도메인 + shared)
+### 아키텍처 요약
 
-FSD 전층 대신, **프로젝트 포트폴리오 도메인**과 **공용 UI·유틸**만 나눴다. 단일 페이지이므로 `App.tsx`는 언어·필터·모달 등 **페이지 단위 상태와 섹션 조립(오케스트레이터)** 역할을 유지한다.
+| 위치                             | 역할                      |
+| -------------------------------- | ------------------------- |
+| `app/[lang]/_components/`        | 이력서 라우트 전용 UI     |
+| `app/lab/_components/` · `_lib/` | Lab 전용 UI · routes SSOT |
+| `components/ui/`                 | 여러 라우트 공용 UI       |
+| `lib/data/` · `lib/i18n/`        | 데이터·카피·유틸          |
 
-```txt
-src/
-  App.tsx                          # 섹션 조립, i18n 객체(t), 페이지 상태
-  domain/
-    project/
-      model/
-        types.ts                   # ProjectAchievement, ResumeProject
-        projects.tsx               # buildPortfolioProjects(lang) — 카드 데이터·아이콘
-      ui/
-        ProjectCard.tsx            # 프로젝트 도메인 UI
-  shared/
-    lib/
-      motion.ts                    # fadeIn, staggerContainer (motion variants)
-    ui/
-      StatItem.tsx
-      TechCategory.tsx
-      MindsetItem.tsx
-      ExperienceItem.tsx
-      ContactModal.tsx             # 연락 모달 (Web3Forms)
-  main.tsx
-  index.css
-```
-
-- **`domain/project`**: 이력에 실린 **프로젝트 카드**에만 쓰이는 타입·데이터·`ProjectCard`. 다른 도메인이 생기면 `domain/<이름>/`을 같은 패턴으로 추가하면 된다.
-- **`shared/ui`**: 여러 섹션에서 쓰는 **표현 위주 컴포넌트**와 연락 모달.
-- **`shared/lib`**: 애니메이션 variant 등 **도메인과 무관한 작은 유틸**.
-
-### 왜 이 분할 방식을 선택하는가
-
-- **FSD 전체를 쓰지 않는 이유**  
-  페이지가 하나이고 팀 규모가 작다. `widgets` / `pages` 레이어까지 두면 **규칙 비용**이 이득보다 클 수 있다.
-
-- **도메인 폴더를 둔 이유**  
-  프로젝트 성과·카피·카드 UI가 한 덩어리로 커졌을 때 **`domain/project`** 아래에서만 찾으면 되어 수정 경로가 짧다.
-
-- **`shared`만 별도로 둔 이유**  
-  스탯·기술 태그·경력 타임라인·연락 모달은 **포트폴리오 전역에서 재사용**되는 표현 컴포넌트로 묶었다.
-
-- **`App.tsx`를 얇게 만들지 않은 이유 (현재)**  
-  i18n 문자열 전체가 `App` 안에 있어 파일 길이는 남아 있다. 필요 시 `shared/i18n/ko.ts` · `en.ts`로만 추가 분리하면 된다.
+- 메인: `/ko` · `/en` SSG + `HomePageClient` Client shell
+- Lab: `/lab/*`, `_lib/routes.ts` SSOT
+- 상세: [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)
 
 ## ✨ 주요 기능 (Key Features)
 

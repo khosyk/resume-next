@@ -21,7 +21,7 @@ Before adopt, answer:
 - memory, assumption, other-project patterns
 
 ## Naming
-- doc vs code mismatch → use code name (`DemoPageShell` not `DemoPageLayout`)
+- doc vs code mismatch → use code name (`LabPageShell` not `LabPageLayout`)
 - label current vs target (Web3Forms: now client, Week4 server)
 
 ## v1 IN

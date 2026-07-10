@@ -1,5 +1,5 @@
-import { HtmlLang } from "@/features/home/components/HtmlLang";
-import { isValidLang, type Lang } from "@/shared/i18n";
+import { HtmlLang } from "@/app/[lang]/_components/HtmlLang";
+import { isValidLang, type Lang } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 
 interface LangLayoutProps {
