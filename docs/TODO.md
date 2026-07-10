@@ -2,7 +2,8 @@
 
 > 마스터 계획: [LAB_PLAN.md](./LAB_PLAN.md)  
 > 아키텍처: [ARCHITECTURE.md](./ARCHITECTURE.md)  
-> 브랜치: `feat/demo-hub-nextjs`  
+> **직접 작성 가이드:** [lab-guides/README.md](./lab-guides/README.md)  
+> 브랜치: `feat/lab-content`  
 > 완료 시 `[x]`로 표시
 
 ---
@@ -85,7 +86,7 @@
 - [x] `/lab/ssr` · `/lab/ssg` · `/lab/isr` · `/lab/csr`
 - [x] `/lab/charts` · `/lab/3d`
 - [ ] `lib/data/portfolio-metrics.ts`
-- [ ] 각 페이지 Why / How / Trade-offs 카피 (함께 작성)
+- [ ] 각 페이지 Why / How / Trade-offs 카피 — [lab-guides/](./lab-guides/) 단계별 가이드 참고
 - [ ] `/api/metrics` — CSR 데모용
 
 ---

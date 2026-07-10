@@ -1,9 +1,10 @@
 # Engineering Lab & Next.js 마이그레이션 계획
 
-> **브랜치:** `feat/demo-hub-nextjs`  
+> **브랜치:** `feat/lab-content`  
 > **목표:** `/`는 이력서·경력기술서, `/lab/*`는 Next.js·차트·3D **어필 중심** Lab  
 > **기간:** 3~~4주 (주 10~~15h, 본업 병행)  
-> **체크리스트:** [TODO.md](./TODO.md) · **의사결정:** [DECISIONS.md](./DECISIONS.md) · **아키텍처:** [ARCHITECTURE.md](./ARCHITECTURE.md)
+> **체크리스트:** [TODO.md](./TODO.md) · **의사결정:** [DECISIONS.md](./DECISIONS.md) · **아키텍처:** [ARCHITECTURE.md](./ARCHITECTURE.md)  
+> **직접 작성 가이드:** [lab-guides/README.md](./lab-guides/README.md)
 
 ---
 
