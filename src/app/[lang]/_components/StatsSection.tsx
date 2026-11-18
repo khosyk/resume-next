@@ -1,13 +1,15 @@
 import { StatItem } from "@/components/ui/StatItem";
+import { portfolioMetrics } from "@/lib/data/portfolio-metrics";
 import { getDictionary, type Lang } from "@/lib/i18n";
 
 interface StatsSectionProps {
 	lang: Lang;
 }
 
-// 성과 지표 — SSG Server
+// 성과 지표 — SSG Server (portfolioMetrics SSOT)
 export function StatsSection({ lang }: StatsSectionProps) {
 	const t = getDictionary(lang);
+	const { crashRate, fps, qaPass, codeReduction } = portfolioMetrics;
 
 	return (
 		<section
@@ -19,8 +21,12 @@ export function StatsSection({ lang }: StatsSectionProps) {
 					<div className="animate-fade-up" style={{ animationDelay: "0s" }}>
 						<StatItem
 							label={t.stats.stability}
-							value="0.02%"
-							subValue={lang === "ko" ? "기존 3.89% 대비" : "vs. prior 3.89%"}
+							value={`${crashRate.after}${crashRate.unit}`}
+							subValue={
+								lang === "ko"
+									? `기존 ${crashRate.before}${crashRate.unit} 대비`
+									: `vs. prior ${crashRate.before}${crashRate.unit}`
+							}
 							desc={t.stats.stabilityDesc}
 							color="text-white"
 						/>
@@ -31,8 +37,8 @@ export function StatsSection({ lang }: StatsSectionProps) {
 					>
 						<StatItem
 							label={t.stats.performance}
-							value="60fps"
-							subValue="40fps → 60fps"
+							value={`${fps.after}fps`}
+							subValue={`${fps.before}fps → ${fps.after}fps`}
 							desc={t.stats.performanceDesc}
 							color="text-white"
 						/>
@@ -40,7 +46,7 @@ export function StatsSection({ lang }: StatsSectionProps) {
 					<div className="animate-fade-up" style={{ animationDelay: "0.2s" }}>
 						<StatItem
 							label={t.stats.productivity}
-							value="+20%"
+							value={`+${codeReduction}%`}
 							subValue={lang === "ko" ? "코드량 절감" : "Code reduction"}
 							desc={t.stats.productivityDesc}
 							color="text-white"
@@ -52,8 +58,8 @@ export function StatsSection({ lang }: StatsSectionProps) {
 					>
 						<StatItem
 							label={t.stats.efficiency}
-							value="100%"
-							subValue="60% → 100%"
+							value={`${qaPass.after}${qaPass.unit}`}
+							subValue={`${qaPass.before}${qaPass.unit} → ${qaPass.after}${qaPass.unit}`}
 							desc={t.stats.efficiencyDesc}
 							color="text-white"
 						/>
