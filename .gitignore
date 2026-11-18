@@ -7,3 +7,5 @@ coverage/
 *.log
 .env*
 !.env.example
+tsconfig.tsbuildinfo
+.claude/settings.local.json
