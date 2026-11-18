@@ -1,0 +1,35 @@
+---
+description: TS/React conventions for src/
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Code
+
+## Layout (Next.js App Router)
+`src/app` routes · route colocation `app/*/_components` `app/*/_lib`
+shared UI `src/components` · data/i18n/utils `src/lib`
+import `@/*` · Lab nav SSOT `app/lab/_lib/routes.ts` · Lab shell `LabPageShell`
+SSOT: `docs/ARCHITECTURE.md`
+
+## Component
+- `const` FC, no `React.FC`
+- `interface` props: required first, optional `?` last
+- no `any`, strict TS
+- `"use client"` only if hooks/interaction
+
+## Style
+Tailwind `brand-*` from `globals.css` @theme
+
+## Lab render
+| page | mode |
+| SSR/SSG/ISR | Server Component default |
+| Charts/3D | `dynamic(ssr: false)` |
+| CSR | `/api/metrics` + skeleton (placeholder if missing) |
+| ISR | `export const revalidate = 60` |
+
+## Done
+`yarn` only · finish with `yarn verify` · no-console warn (scripts exempt)
+
+## DO NOT
+v2 features · commit `.env` · expose Web3Forms key · unrelated edits
