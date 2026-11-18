@@ -4,18 +4,18 @@
 
 ## 🔬 Engineering Lab (진행 중)
 
-Next.js Engineering Lab 마이그레이션은 `feat/demo-hub-nextjs` 브랜치에서 진행합니다.
+Next.js Engineering Lab 작업은 `feat/lab-content` 브랜치에서 진행했습니다. 다음 계획은 [사이트 v2 계획](./docs/SITE_PLAN.md)에 있습니다.
 
 - 메인 `/` — 이력서·경력기술서 (현행 유지)
 - `/lab` — SSR · SSG · ISR · CSR · Charts · 3D 어필 Lab
 
-| 문서                                 | 설명                                    |
-| ------------------------------------ | --------------------------------------- |
-| [아키텍처](./docs/ARCHITECTURE.md)   | Next.js colocation, `components`, `lib` |
-| [Lab 계획](./docs/LAB_PLAN.md)       | 사이트맵, 페이지별 Why/How              |
-| [Lab 작성 가이드](./docs/lab-guides/README.md) | 페이지별 단계별 직접 작성 워크북 |
-| [구현 TODO](./docs/TODO.md)          | 주차별 체크리스트                       |
-| [의사결정 로그](./docs/DECISIONS.md) | 9점+ 기준 채택·보류·사용자 확인 항목    |
+| 문서                                           | 설명                                    |
+| ---------------------------------------------- | --------------------------------------- |
+| [아키텍처](./docs/ARCHITECTURE.md)             | Next.js colocation, `components`, `lib` |
+| [Lab 계획](./docs/LAB_PLAN.md)                 | 사이트맵, 페이지별 Why/How              |
+| [Lab 작성 가이드](./docs/lab-guides/README.md) | 페이지별 단계별 직접 작성 워크북        |
+| [구현 TODO](./docs/TODO.md)                    | 주차별 체크리스트                       |
+| [의사결정 로그](./docs/DECISIONS.md)           | 9점+ 기준 채택·보류·사용자 확인 항목    |
 
 ## 🚀 기술 스펙 (Technical Stack)
 

@@ -25,10 +25,10 @@
 
 ### SPA(CSR)와 차이 한 줄
 
-| | SSR | CSR |
-|--|-----|-----|
-| 첫 HTML | 숫자·텍스트 포함 | 빈 껍데기 + JS |
-| View Source | 데이터 있음 | 데이터 없음 |
+|             | SSR              | CSR            |
+| ----------- | ---------------- | -------------- |
+| 첫 HTML     | 숫자·텍스트 포함 | 빈 껍데기 + JS |
+| View Source | 데이터 있음      | 데이터 없음    |
 
 ---
 
@@ -57,19 +57,19 @@
 
 ```tsx
 <LabPageShell href="/lab/ssr" strategy="SSR" title="SSR Lab">
-  {/* 아래를 직접 작성 */}
-  <section>
-    <h2>Why</h2>
-    <p>...</p>
-    <h2>Live Lab</h2>
-    {/* metrics + generatedAt */}
-    <h2>How</h2>
-    <ul>...</ul>
-    <h2>Trade-offs</h2>
-    <ul>...</ul>
-    <h2>Verify</h2>
-    <ol>...</ol>
-  </section>
+	{/* 아래를 직접 작성 */}
+	<section>
+		<h2>Why</h2>
+		<p>...</p>
+		<h2>Live Lab</h2>
+		{/* metrics + generatedAt */}
+		<h2>How</h2>
+		<ul>...</ul>
+		<h2>Trade-offs</h2>
+		<ul>...</ul>
+		<h2>Verify</h2>
+		<ol>...</ol>
+	</section>
 </LabPageShell>
 ```
 
@@ -98,8 +98,8 @@ import { portfolioMetrics } from "@/lib/data/portfolio-metrics";
 export const dynamic = "force-dynamic"; // 요청마다 렌더 (Lab 설명용)
 
 export default async function SsrLabPage() {
-  const generatedAt = new Date().toISOString();
-  // children에 metrics + generatedAt
+	const generatedAt = new Date().toISOString();
+	// children에 metrics + generatedAt
 }
 ```
 
@@ -136,11 +136,11 @@ export default async function SsrLabPage() {
 
 ## 4. 흔한 실수
 
-| 실수 | 결과 |
-|------|------|
-| `"use client"`를 page에 붙임 | 서버 매 요청 렌더 의도가 흐려짐 |
+| 실수                           | 결과                               |
+| ------------------------------ | ---------------------------------- |
+| `"use client"`를 page에 붙임   | 서버 매 요청 렌더 의도가 흐려짐    |
 | View Source 대신 Elements만 봄 | CSR hydration 후 DOM만 보여서 착각 |
-| metrics를 Client에서만 fetch | 이 페이지는 SSR Lab이 아니게 됨 |
+| metrics를 Client에서만 fetch   | 이 페이지는 SSR Lab이 아니게 됨    |
 
 ---
 

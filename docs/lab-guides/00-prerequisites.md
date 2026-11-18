@@ -26,12 +26,12 @@ src/lib/data/portfolio-metrics.ts
 
 ```ts
 export const portfolioMetrics = {
-  crashRate: { before: 3.89, after: 0.02, unit: "%" },
-  fps: { before: 40, after: 60 },
-  qaPass: { before: 60, after: 100, unit: "%" },
-  codeReduction: 20,
-  users: 550_000,
-  mau: 100_000,
+	crashRate: { before: 3.89, after: 0.02, unit: "%" },
+	fps: { before: 40, after: 60 },
+	qaPass: { before: 60, after: 100, unit: "%" },
+	codeReduction: 20,
+	users: 550_000,
+	mau: 100_000,
 } as const;
 ```
 
@@ -69,11 +69,11 @@ src/app/api/metrics/route.ts
 
 ### 지식 포인트
 
-| 용어 | 의미 |
-|------|------|
-| **Route Handler** | `app/api/.../route.ts` — Next 서버의 HTTP 엔드포인트 |
-| **BFF** | Backend For Frontend — 브라우저가 직접 DB가 아니라 Next API를 호출 |
-| CSR Lab | 첫 HTML에는 데이터 없음 → JS 실행 후 fetch로 채움 |
+| 용어              | 의미                                                               |
+| ----------------- | ------------------------------------------------------------------ |
+| **Route Handler** | `app/api/.../route.ts` — Next 서버의 HTTP 엔드포인트               |
+| **BFF**           | Backend For Frontend — 브라우저가 직접 DB가 아니라 Next API를 호출 |
+| CSR Lab           | 첫 HTML에는 데이터 없음 → JS 실행 후 fetch로 채움                  |
 
 ### 검증
 

@@ -3,6 +3,7 @@
 > 마스터 계획: [LAB_PLAN.md](./LAB_PLAN.md)  
 > 아키텍처: [ARCHITECTURE.md](./ARCHITECTURE.md)  
 > **직접 작성 가이드:** [lab-guides/README.md](./lab-guides/README.md)  
+> 사이트 v2(블로그·RAG) 계획: [SITE_PLAN.md](./SITE_PLAN.md)  
 > 브랜치: `feat/lab-content`  
 > 완료 시 `[x]`로 표시
 
@@ -85,9 +86,9 @@
 
 - [x] `/lab/ssr` · `/lab/ssg` · `/lab/isr` · `/lab/csr`
 - [x] `/lab/charts` · `/lab/3d`
-- [ ] `lib/data/portfolio-metrics.ts`
-- [ ] 각 페이지 Why / How / Trade-offs 카피 — [lab-guides/](./lab-guides/) 단계별 가이드 참고
-- [ ] `/api/metrics` — CSR 데모용
+- [x] `lib/data/portfolio-metrics.ts`
+- [x] 각 페이지 Why / How / Trade-offs 카피 — [lab-guides/](./lab-guides/) 단계별 가이드 참고
+- [x] `/api/metrics` — CSR 데모용
 
 ---
 
@@ -97,22 +98,22 @@
 
 ### 3.1 Charts
 
-- [ ] `yarn add recharts`
-- [ ] Before/After Bar, Timeline Line
-- [ ] `/lab/charts` — `dynamic(ssr: false)` 적용
-- [ ] Why/How (eCharts·RN 경험 연결 문구)
+- [x] `yarn add recharts`
+- [x] Before/After Bar, Timeline Line
+- [x] `/lab/charts` — `dynamic(ssr: false)` 적용
+- [x] Why/How (eCharts·RN 경험 연결 문구)
 
 ### 3.2 3D
 
-- [ ] `yarn add three @react-three/fiber @react-three/drei`
-- [ ] Performance Ring 씬
-- [ ] `/lab/3d` — `dynamic(ssr: false)`
-- [ ] WebGL 실패 / `prefers-reduced-motion` → 2D fallback
+- [x] `yarn add three @react-three/fiber @react-three/drei`
+- [x] Performance Ring 씬
+- [x] `/lab/3d` — `dynamic(ssr: false)`
+- [x] WebGL 실패 / `prefers-reduced-motion` → 2D fallback
 
 ### 3.3 Week 3 완료
 
 - [ ] 모바일 레이아웃 점검
-- [ ] Hub ↔ 하위 LabNav 순환
+- [x] Hub ↔ 하위 LabNav 순환
 
 ---
 

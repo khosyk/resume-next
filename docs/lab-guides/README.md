@@ -16,16 +16,16 @@
 
 ## 2. 권장 진행 순서
 
-| 단계 | 문서 | 할 일 |
-|------|------|--------|
+| 단계  | 문서                                         | 할 일                                        |
+| ----- | -------------------------------------------- | -------------------------------------------- |
 | **0** | [00-prerequisites.md](./00-prerequisites.md) | `portfolio-metrics` + (CSR용) `/api/metrics` |
-| **1** | [hub.md](./hub.md) | Hub 소개·비교표 카피 |
-| **2** | [ssr.md](./ssr.md) | 첫 렌더링 Lab — 요청마다 HTML |
-| **3** | [ssg.md](./ssg.md) | 빌드 타임 HTML |
-| **4** | [isr.md](./isr.md) | 주기적 재생성 |
-| **5** | [csr.md](./csr.md) | 브라우저 fetch |
-| **6** | [charts.md](./charts.md) | Week 3 — Recharts |
-| **7** | [3d.md](./3d.md) | Week 3 — R3F |
+| **1** | [hub.md](./hub.md)                           | Hub 소개·비교표 카피                         |
+| **2** | [ssr.md](./ssr.md)                           | 첫 렌더링 Lab — 요청마다 HTML                |
+| **3** | [ssg.md](./ssg.md)                           | 빌드 타임 HTML                               |
+| **4** | [isr.md](./isr.md)                           | 주기적 재생성                                |
+| **5** | [csr.md](./csr.md)                           | 브라우저 fetch                               |
+| **6** | [charts.md](./charts.md)                     | Week 3 — Recharts                            |
+| **7** | [3d.md](./3d.md)                             | Week 3 — R3F                                 |
 
 **팁:** 2→5는 **같은 metrics 표**를 쓰고 **타임스탬프 필드만** 다르게 보여 주면 비교 설득력이 최대입니다.
 
@@ -55,14 +55,14 @@
 
 `src/lib/data/portfolio-metrics.ts` (Week 2 생성 예정) — **홈 Stats와 동일:**
 
-| 필드 | 값 |
-|------|-----|
-| crashRate | 3.89% → 0.02% |
-| fps | 40 → 60 |
-| qaPass | 60% → 100% |
-| codeReduction | +20% |
-| users | 550,000 |
-| mau | 100,000 |
+| 필드          | 값            |
+| ------------- | ------------- |
+| crashRate     | 3.89% → 0.02% |
+| fps           | 40 → 60       |
+| qaPass        | 60% → 100%    |
+| codeReduction | +20%          |
+| users         | 550,000       |
+| mau           | 100,000       |
 
 현재 `StatsSection`에 하드코딩된 값과 맞춰야 합니다.
 
@@ -70,15 +70,15 @@
 
 ## 5. 페이지 ↔ 파일 매핑
 
-| URL | page 파일 |
-|-----|-----------|
-| `/lab` | `src/app/lab/page.tsx` |
-| `/lab/ssr` | `src/app/lab/ssr/page.tsx` |
-| `/lab/ssg` | `src/app/lab/ssg/page.tsx` |
-| `/lab/isr` | `src/app/lab/isr/page.tsx` |
-| `/lab/csr` | `src/app/lab/csr/page.tsx` |
+| URL           | page 파일                     |
+| ------------- | ----------------------------- |
+| `/lab`        | `src/app/lab/page.tsx`        |
+| `/lab/ssr`    | `src/app/lab/ssr/page.tsx`    |
+| `/lab/ssg`    | `src/app/lab/ssg/page.tsx`    |
+| `/lab/isr`    | `src/app/lab/isr/page.tsx`    |
+| `/lab/csr`    | `src/app/lab/csr/page.tsx`    |
 | `/lab/charts` | `src/app/lab/charts/page.tsx` |
-| `/lab/3d` | `src/app/lab/3d/page.tsx` |
+| `/lab/3d`     | `src/app/lab/3d/page.tsx`     |
 
 공통 셸: `src/app/lab/_components/LabPageShell.tsx`  
 네비 SSOT: `src/app/lab/_lib/routes.ts`

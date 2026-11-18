@@ -28,7 +28,7 @@ Before adopt, answer:
 `/`, Lab ko copy, Recharts only, R3F+2D fallback, `portfolioMetrics` single source
 
 ## v1 OUT
-Admin/Auth, ECharts, `/ko` `/en` routes, webhook revalidate
+Admin/Auth, ECharts, webhook revalidate
 
 ## On new 9+ decision
 Append 1 row to `docs/DECISIONS.md` (score + reason)

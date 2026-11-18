@@ -96,20 +96,20 @@ src/app/lab/csr/page.tsx                   (Server — LabPageShell만)
 
 같은 metrics, 다른 증거:
 
-| | SSR | CSR |
-|--|-----|-----|
-| View Source | 숫자 있음 | 없음 |
-| Network API | 없음 | `/api/metrics` |
+|             | SSR       | CSR            |
+| ----------- | --------- | -------------- |
+| View Source | 숫자 있음 | 없음           |
+| Network API | 없음      | `/api/metrics` |
 
 ---
 
 ## 4. 흔한 실수
 
-| 실수 | 결과 |
-|------|------|
-| page 전체 `"use client"` | Server/Client 경계 학습 목적 흐림 |
-| API 없이 Client에서 metrics import만 | “fetch CSR” 증명 실패 |
-| Elements 탭만 확인 | hydration 후라 SSR처럼 보임 |
+| 실수                                 | 결과                              |
+| ------------------------------------ | --------------------------------- |
+| page 전체 `"use client"`             | Server/Client 경계 학습 목적 흐림 |
+| API 없이 Client에서 metrics import만 | “fetch CSR” 증명 실패             |
+| Elements 탭만 확인                   | hydration 후라 SSR처럼 보임       |
 
 ---
 

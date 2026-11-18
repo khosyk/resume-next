@@ -24,11 +24,11 @@ build → HTML 파일 생성 → deploy → 사용자 요청 → 캐시된 HTML
 
 ### SSR과 비교
 
-| | SSG | SSR |
-|--|-----|-----|
-| HTML 생성 시점 | build | every request |
-| `generatedAt` 매 요청 변경 | ✗ (build 시 1번) | ✓ |
-| TTFB | 보통 더 좋음 | 서버 작업 포함 |
+|                            | SSG              | SSR            |
+| -------------------------- | ---------------- | -------------- |
+| HTML 생성 시점             | build            | every request  |
+| `generatedAt` 매 요청 변경 | ✗ (build 시 1번) | ✓              |
+| TTFB                       | 보통 더 좋음     | 서버 작업 포함 |
 
 ---
 
@@ -41,7 +41,7 @@ build → HTML 파일 생성 → deploy → 사용자 요청 → 캐시된 HTML
 
 ```tsx
 // A) 빌드 시 env (next.config 또는 build script)
-process.env.BUILD_TIME
+process.env.BUILD_TIME;
 
 // B) 모듈 스코프 상수 (해당 모듈이 빌드 시 평가됨)
 const builtAt = new Date().toISOString();
@@ -103,10 +103,10 @@ const builtAt = new Date().toISOString();
 
 같은 날 테스트:
 
-| 페이지 | 새로고침 시 시간 필드 |
-|--------|----------------------|
+| 페이지     | 새로고침 시 시간 필드   |
+| ---------- | ----------------------- |
 | `/lab/ssr` | `generatedAt` 매번 변경 |
-| `/lab/ssg` | `builtAt` 고정 |
+| `/lab/ssg` | `builtAt` 고정          |
 
 이 차이를 Hub 비교표·면접 스토리에 넣으세요.
 

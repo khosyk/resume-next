@@ -19,11 +19,11 @@
 
 ### SSG / SSR / ISR 한 줄
 
-| 전략 | freshness | rebuild |
-|------|-----------|---------|
-| SSG | deploy까지 고정 | 전체 rebuild |
-| ISR | 주기적 갱신 | 해당 페이지만 |
-| SSR | 매 요청 최신 | 해당 요청마다 |
+| 전략 | freshness       | rebuild       |
+| ---- | --------------- | ------------- |
+| SSG  | deploy까지 고정 | 전체 rebuild  |
+| ISR  | 주기적 갱신     | 해당 페이지만 |
+| SSR  | 매 요청 최신    | 해당 요청마다 |
 
 ---
 
@@ -38,8 +38,8 @@
 export const revalidate = 60;
 
 export default async function IsrLabPage() {
-  const regeneratedAt = new Date().toISOString();
-  // ...
+	const regeneratedAt = new Date().toISOString();
+	// ...
 }
 ```
 
@@ -91,11 +91,11 @@ export default async function IsrLabPage() {
 
 ### Step 5 — SSG·SSR과 대비 메모
 
-| URL | 시간 필드 | 새로고침 |
-|-----|-----------|----------|
-| ssg | builtAt | 안 바뀜 |
+| URL | 시간 필드     | 새로고침        |
+| --- | ------------- | --------------- |
+| ssg | builtAt       | 안 바뀜         |
 | isr | regeneratedAt | 주기적으로 바뀜 |
-| ssr | generatedAt | 매번 바뀜 |
+| ssr | generatedAt   | 매번 바뀜       |
 
 ---
 

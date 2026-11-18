@@ -22,11 +22,11 @@ Recharts (Client) → Bar + Line
 
 ### Recharts를 쓰는 이유 (이 포트폴리오 맥락)
 
-| 경험 | Web 선택 |
-|------|----------|
-| 열달후에 Admin — Chart.js | Web은 번들·React 친화 고려 |
-| 열달후에 — eCharts | 기능 많지만 무거움 |
-| **이 Lab** | **Recharts** — React 컴포넌트, 경량, SSR과 분리 쉬움 |
+| 경험                      | Web 선택                                             |
+| ------------------------- | ---------------------------------------------------- |
+| 열달후에 Admin — Chart.js | Web은 번들·React 친화 고려                           |
+| 열달후에 — eCharts        | 기능 많지만 무거움                                   |
+| **이 Lab**                | **Recharts** — React 컴포넌트, 경량, SSR과 분리 쉬움 |
 
 ### SSR과의 관계
 
@@ -48,11 +48,11 @@ LAB_PLAN 기준 **차트 2개:**
 
 `portfolioMetrics`의 개선 수치:
 
-| 지표 | before | after |
-|------|--------|-------|
-| crashRate | 3.89% | 0.02% |
-| fps | 40 | 60 |
-| qaPass | 60% | 100% |
+| 지표      | before | after |
+| --------- | ------ | ----- |
+| crashRate | 3.89%  | 0.02% |
+| fps       | 40     | 60    |
+| qaPass    | 60%    | 100%  |
 
 **UI 카피 예:** `품질 지표 Before → After`
 
@@ -106,16 +106,16 @@ src/app/lab/charts/page.tsx                # Server — LabPageShell + dynamic i
 import dynamic from "next/dynamic";
 
 const ChartsLab = dynamic(() => import("../_components/ChartsLab"), {
-  ssr: false,
-  loading: () => <p>차트 로딩 중…</p>,
+	ssr: false,
+	loading: () => <p>차트 로딩 중…</p>,
 });
 
 export default function ChartsLabPage() {
-  return (
-    <LabPageShell href="/lab/charts" strategy="Charts" title="Charts Lab">
-      {/* Why, ChartsLab, How, Trade-offs, Verify */}
-    </LabPageShell>
-  );
+	return (
+		<LabPageShell href="/lab/charts" strategy="Charts" title="Charts Lab">
+			{/* Why, ChartsLab, How, Trade-offs, Verify */}
+		</LabPageShell>
+	);
 }
 ```
 
@@ -125,7 +125,16 @@ export default function ChartsLabPage() {
 
 ```tsx
 "use client";
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import {
+	BarChart,
+	Bar,
+	LineChart,
+	Line,
+	XAxis,
+	YAxis,
+	Tooltip,
+	ResponsiveContainer,
+} from "recharts";
 import { portfolioMetrics } from "@/lib/data/portfolio-metrics";
 
 // barData: crashRate, fps, qaPass before/after
@@ -162,21 +171,21 @@ import { portfolioMetrics } from "@/lib/data/portfolio-metrics";
 
 ## 4. Recharts 핵심 API (학습 메모)
 
-| 컴포넌트 | 역할 |
-|----------|------|
-| `ResponsiveContainer` | 부모 width 100% |
-| `BarChart` / `LineChart` | 차트 타입 |
-| `XAxis` / `YAxis` | 축 |
-| `Tooltip` | 호버 상세 |
-| `data` prop | `{ name, before, after }[]` 형태 배열 |
+| 컴포넌트                 | 역할                                  |
+| ------------------------ | ------------------------------------- |
+| `ResponsiveContainer`    | 부모 width 100%                       |
+| `BarChart` / `LineChart` | 차트 타입                             |
+| `XAxis` / `YAxis`        | 축                                    |
+| `Tooltip`                | 호버 상세                             |
+| `data` prop              | `{ name, before, after }[]` 형태 배열 |
 
 **데이터 변환 예:**
 
 ```ts
 const barData = [
-  { name: "Crash", before: 3.89, after: 0.02 },
-  { name: "FPS", before: 40, after: 60 },
-  { name: "QA", before: 60, after: 100 },
+	{ name: "Crash", before: 3.89, after: 0.02 },
+	{ name: "FPS", before: 40, after: 60 },
+	{ name: "QA", before: 60, after: 100 },
 ];
 ```
 
@@ -184,11 +193,11 @@ const barData = [
 
 ## 5. 흔한 실수
 
-| 실수 | 결과 |
-|------|------|
-| page 전체 `"use client"` | dynamic import 학습 포인트 약화 |
-| Recharts를 Server Component에서 직접 import | 빌드/런타임 에러 (window 없음) |
-| metrics 숫자를 차트와 테이블에서 다르게 | SSOT 신뢰도 하락 |
+| 실수                                        | 결과                            |
+| ------------------------------------------- | ------------------------------- |
+| page 전체 `"use client"`                    | dynamic import 학습 포인트 약화 |
+| Recharts를 Server Component에서 직접 import | 빌드/런타임 에러 (window 없음)  |
+| metrics 숫자를 차트와 테이블에서 다르게     | SSOT 신뢰도 하락                |
 
 ---
 
