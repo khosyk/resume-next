@@ -11,18 +11,19 @@ export function buildPortfolioProjects(lang: "ko" | "en"): ResumeProject[] {
 			category: "App",
 			subtitle:
 				lang === "ko"
-					? "임신·출산·육아 통합 관리 앱 (누적 가입자 55만)"
-					: "Pregnancy & parenting app (~550K cumulative users)",
-			// 이력서(Notion) 기술 스택 요약과 동일 계열
+					? "임신·출산·육아 통합 헬스케어 앱 (가입자 55만·MAU 10만)"
+					: "Pregnancy & parenting healthcare app (550K signups, 100K MAU)",
+			// 이력서 PDF(2026-10) 업무 상세 기준
 			tags: [
 				"React Native",
+				"TypeScript",
 				"MobX",
-				"REST API",
-				"Firebase",
-				"WebView",
-				"Reanimated",
+				"Firebase Crashlytics",
 				"eCharts",
-				"Android 15",
+				"Skia",
+				"Reanimated",
+				"i18next",
+				"Jenkins",
 			],
 			link: "https://apps.apple.com/kr/app/%EC%97%B4%EB%8B%AC%ED%9B%84%EC%97%90-%EC%9E%84%EC%8B%A0-%EC%B6%9C%EC%82%B0-%EC%9C%A1%EC%95%84-%ED%95%84%EC%88%98-%EC%95%B1/id1491862784",
 			images: [
@@ -34,49 +35,62 @@ export function buildPortfolioProjects(lang: "ko" | "en"): ResumeProject[] {
 					? [
 							{
 								problem:
-									"비정상 종료율 3.89%·스크롤/차트 병목·클래스형 레거시로 유지보수·체감 성능 한계.",
+									"Sentry 무료 플랜의 데이터 한도로 에러 기록이 빠지고, 비정상 종료율이 3.89%.",
 								thinking:
-									"Crashlytics 기반 원인 분석, 클래스형 전면 함수형(Hooks) 전환, Atomic Design에 맞춘 구조 정리 및 스니펫·공유 컴포넌트로 중복 제거.",
-								result:
-									"비정상 종료율 0.02% 수준으로 안정화, 스크린 40fps→60fps·상용 품질에 가까운 체감 성능 확보.",
+									"Firebase Crashlytics를 병행 도입하고, 화면 단위 로깅(Context)으로 Unmount 시 해제되지 않은 리스너의 메모리 누수와 App State 생명주기 비동기 오류를 추적해 수정.",
+								result: "비정상 종료율 3.89% → 0.02%.",
 							},
 							{
 								problem:
-									"헤더 Glitch·API 중복 호출·eCharts 스크롤 지연 등 인터랙션·데이터 표현 이슈.",
+									"대용량 차트 데이터를 그릴 때 프레임 드랍(40fps)과 메모리 과부하.",
 								thinking:
-									"Reanimated 기반 헤더 교체, 디바운스로 중복 요청·화면 이동 방어, ScrollView 기반 커스텀 차트로 스크롤 성능 확보.",
-								result: "끊김 없는 스크롤·차트 사용성 개선, 복잡 화면에서도 일관된 UX.",
+									"eCharts 렌더러를 SVG에서 Skia로 바꾸고 Merge 옵션으로 데이터를 증분 업데이트. 기획·디자인과 협의해 가로축을 최대 7일 단위로 제한하고 경계면 감지 지연 로딩을 적용.",
+								result: "40fps → 60fps, 초기 프레임 드랍 해소.",
 							},
 							{
-								problem: "Android 15 및 16KB 페이지 사이즈 등 최신 OS·인프라 이슈.",
+								problem:
+									"클래스형 레거시에 반복 로직이 흩어져 있고, 버튼 연타 시 화면 중복 전환·API 중복 호출 발생.",
 								thinking:
-									"OS 메모리 정책·네이티브 연동 지점을 점검하고 호환 빌드·라이브러리 정합성을 맞춤.",
+									"함수형(Hooks)으로 전면 전환하고 반복 비즈니스 로직·Side Effect를 커스텀 훅으로 격리. 첫 입력은 즉시 실행하고 이후 입력은 막는 Leading-edge Throttle 훅을 구현.",
+								result: "전체 코드량 약 20% 절감, 중복 트리거 결함 해결.",
+							},
+							{
+								problem: "국내·글로벌 앱 운영 중 OS·인프라 변경과 다국어 대응 부담.",
+								thinking:
+									"RN 0.73.8 → 0.81.4 업그레이드와 Jenkins 배포, Android 15 16KB 페이지 크기 대응, 이미지 업로드 방화벽 오류를 JPG 인코딩 표준화로 해결, i18n과 구글 시트 연동 번역 자동화.",
 								result:
-									"최신 안드로이드 환경에서도 서비스 연속성·크래시 없는 실행 경로 유지.",
+									"최신 OS에서도 서비스 연속성 유지, 글로벌 버전 다국어 등록 자동화.",
 							},
 						]
 					: [
 							{
 								problem:
-									"3.89% crash rate, scroll/chart bottlenecks, and class-based legacy limiting maintainability.",
+									"Sentry's free-plan data limits dropped error reports; the crash rate was 3.89%.",
 								thinking:
-									"Crashlytics-led triage, full migration to function components (Hooks), structure aligned with Atomic Design, shared snippets/components to cut duplication.",
-								result:
-									"Crash rate toward ~0.02%, screen performance from ~40fps to ~60fps and production-grade stability.",
+									"Added Firebase Crashlytics alongside Sentry; used per-screen logging (Context) to trace listeners left attached after unmount and async App State lifecycle errors, then fixed them.",
+								result: "Crash rate 3.89% → 0.02%.",
 							},
 							{
 								problem:
-									"Header glitch, duplicate API calls, and eCharts scroll lag hurting interactions.",
+									"Large chart datasets caused frame drops (40fps) and memory pressure.",
 								thinking:
-									"Reanimated-based header, debouncing for duplicate calls/navigation, custom ScrollView-based charts for smoother scrolling.",
-								result: "Smoother scrolling and chart UX on complex screens.",
+									"Switched the eCharts renderer from SVG to Skia with incremental Merge updates; agreed with product and design to cap the x-axis at 7 days and lazy-load at the edges.",
+								result: "40fps → 60fps; no more initial frame drops.",
 							},
 							{
-								problem: "Android 15 and 16KB page-size compatibility risks.",
+								problem:
+									"Class-based legacy with scattered repeated logic; rapid taps triggered duplicate navigation and API calls.",
 								thinking:
-									"Reviewed OS memory rules and native-linked paths; aligned builds and dependency compatibility.",
+									"Migrated to function components (Hooks), isolated repeated business logic and side effects in custom hooks, and built a leading-edge throttle hook that runs the first tap and blocks the rest.",
+								result: "About 20% less code overall; duplicate-trigger defects fixed.",
+							},
+							{
+								problem:
+									"Running domestic and global apps through OS and infrastructure changes plus localization.",
+								thinking:
+									"Upgraded RN 0.73.8 → 0.81.4 with Jenkins releases, handled Android 15's 16KB page size, fixed a firewall-blocked image upload by standardizing JPG encoding, and automated translations with i18n and Google Sheets.",
 								result:
-									"Stable execution on current Android targets without service disruption.",
+									"Service kept running on new OS versions; global-version translations registered automatically.",
 							},
 						],
 			color: "bg-blue-50/50",
@@ -193,7 +207,7 @@ export function buildPortfolioProjects(lang: "ko" | "en"): ResumeProject[] {
 								problem: "레거시 코드에 미결 에러가 남아 QA 통과가 어려움.",
 								thinking:
 									"미결함 에러를 전수 조사해 수정하고, 인수인계를 고려한 컴포넌트 구조 재설계를 지향.",
-								result: "QA 테스트 성공률을 서비스 배포 가능 수준으로 회복.",
+								result: "QA 성공률 60% → 100%로 서비스 배포 가능 수준 회복.",
 							},
 						]
 					: [
@@ -214,7 +228,7 @@ export function buildPortfolioProjects(lang: "ko" | "en"): ResumeProject[] {
 								problem: "Legacy defects blocking QA sign-off.",
 								thinking:
 									"Full pass on open defects; component rework with handover-friendly structure.",
-								result: "QA success rate restored to a shippable level.",
+								result: "QA pass rate from 60% to 100%, back to a shippable level.",
 							},
 						],
 			color: "bg-amber-50/50",

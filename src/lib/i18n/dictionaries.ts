@@ -23,9 +23,9 @@ export const dictionaries = {
 			lab: "Technical Lab",
 			summaryTitle: "전문가 요약",
 			summaryDesc:
-				'"최고의 공부는 실전이다"라는 신념 아래, Cursor 및 MCP 등 차세대 AI 도구를 활용한 워크플로우 혁신으로 Swift 네이티브 프레임워크를 단기 습득하여 하드웨어 진단 로직을 구현하는 등 플랫폼의 경계를 넘나드는 압도적 생산성을 증명합니다.',
-			summaryPoint1: "비정상 종료율 99% 개선 경험",
-			summaryPoint2: "AI 기반 워크플로우 혁신 주도",
+				'"최고의 공부는 실전이다"라는 신념으로 일합니다. 이전 직장에서는 하드웨어 센서 진단 모듈 연동 프로젝트를 위해 Swift를 직접 익혀 진단 기능을 구현했고, 지금은 가입자 55만 서비스의 안정성과 성능을 맡고 있습니다.',
+			summaryPoint1: "비정상 종료율 3.89% → 0.02%",
+			summaryPoint2: "Figma→코드 자동화 PoC",
 			summaryPoint3: "비즈니스-기술 브릿지 역할 수행",
 		},
 		stats: {
@@ -33,10 +33,10 @@ export const dictionaries = {
 			performance: "UX 퍼포먼스",
 			productivity: "개발 생산성",
 			efficiency: "운영 효율성",
-			stabilityDesc: "Crashlytics 기반 에러 추적 및 리팩토링",
-			performanceDesc: "Reanimated 기반 인터랙션 최적화",
-			productivityDesc: "Atomic Design 기반 컴포넌트 추상화",
-			efficiencyDesc: "RBAC 시스템 구축 및 QA 통과율 달성",
+			stabilityDesc: "Crashlytics 병행 도입, 메모리 누수·생명주기 오류 수정",
+			performanceDesc: "차트 Skia 렌더러 전환·7일 단위 지연 로딩",
+			productivityDesc: "함수형 전환·커스텀 훅·공통 컴포넌트 정비",
+			efficiencyDesc: "어드민 RBAC 구축·레거시 결함 수정",
 		},
 		tech: {
 			title: "핵심 기술 스택",
@@ -78,21 +78,23 @@ export const dictionaries = {
 			title: "경력",
 			edu: "학력 및 기타",
 			connectiCompany: "커넥트아이 (Connect-i)",
-			connectiRole: "프론트엔드 개발자",
+			connectiRole: "앱 개발자",
 			connectiPeriod: "2024.05 ~ 현재",
-			connecti: "가입자 55만·MAU 10만 규모 '열달후에' 앱 개발·성능·안정성 개선",
+			connecti:
+				"가입자 55만·MAU 10만 '열달후에' 국내·글로벌 앱의 푸시·딥링크·버전 관리·배포·에러 대응·신규 기능 담당",
 			biskitCompany: "비스키트 (Biskit)",
-			biskitRole: "프론트엔드 개발자",
+			biskitRole: "앱/웹 개발 주임연구원",
 			biskitPeriod: "2022.04 ~ 2023.10",
-			biskit: "패스룸 케어 앱 및 운영 어드민(RBAC·엑셀 연동 등) 개발",
+			biskit:
+				"페스룸 케어 앱·어드민, 핀다이렉트 검사 프레임워크(Swift) 등 6개 프로젝트 — 차트 기반 데이터 시각화 어드민·앱 개발",
 			univCompany: "수원대학교",
 			univ: "글로벌 비즈니스학과 졸업",
 			univPeriod: "2010.03 ~ 2018.03",
 			exchange:
-				"대만 Ming Chuan University 교환학생(1년) — 글로벌 서비스에 필요한 적응력·유연한 사고",
+				"대만 명전대학교(Ming Chuan University) 교환학생 2학기(2016.06~2017.06) — 글로벌 비즈니스 교과목을 영어로 이수",
 			globalTitle: "글로벌 역량",
 			globalDesc:
-				"비즈니스 영어 커뮤니케이션과 글로벌 버전 기능 구현·유지보수를 전담할 수 있는 역량을 갖추고 있습니다.",
+				"TOEIC 905점, 호주 워킹홀리데이 1년(2014.09~2015.08). 글로벌 버전 앱의 다국어 요구사항을 개발 스펙에 반영하고, 코엑스 박람회 부스에서 해외 유저·바이어 대상 서비스 시연을 맡았습니다.",
 			extraTitle: "성실성 및 책임감",
 			extraDesc:
 				"30사단 훈련소 훈련 성적 전체 2등(500명 중) 수료, 사단장 표창. 맡은 환경에서 성과를 내는 책임감을 증명했습니다.",
@@ -134,9 +136,9 @@ export const dictionaries = {
 			lab: "Technical Lab",
 			summaryTitle: "Professional Summary",
 			summaryDesc:
-				"With a 'learning by doing' mindset, I demonstrate overwhelming productivity across platforms—such as quickly mastering Swift to implement hardware diagnostics through AI-driven workflow innovations like Cursor and MCP.",
-			summaryPoint1: "99% Crash Rate Improvement",
-			summaryPoint2: "AI-Driven Workflow Innovation",
+				"I work by the belief that the best way to learn is by doing. At my previous company I picked up Swift to build hardware diagnostics for a sensor-module project; now I own stability and performance for a service with 550K users.",
+			summaryPoint1: "Crash rate 3.89% → 0.02%",
+			summaryPoint2: "Figma-to-code automation PoC",
 			summaryPoint3: "Business-Tech Bridge Role",
 		},
 		stats: {
@@ -144,10 +146,11 @@ export const dictionaries = {
 			performance: "UX Performance",
 			productivity: "Development Productivity",
 			efficiency: "Operational Efficiency",
-			stabilityDesc: "Crashlytics-based error tracking & refactoring",
-			performanceDesc: "Reanimated-based interaction optimization",
-			productivityDesc: "Atomic Design-based component abstraction",
-			efficiencyDesc: "RBAC system & 100% QA pass rate",
+			stabilityDesc:
+				"Crashlytics added alongside Sentry; memory-leak and lifecycle fixes",
+			performanceDesc: "Skia chart renderer and 7-day lazy loading",
+			productivityDesc: "Hooks migration, custom hooks, shared components",
+			efficiencyDesc: "Admin RBAC and legacy defect fixes",
 		},
 		tech: {
 			title: "Core Tech Stacks",
@@ -189,25 +192,26 @@ export const dictionaries = {
 			title: "Career",
 			edu: "Education & More",
 			connectiCompany: "Connect-i",
-			connectiRole: "Frontend Developer",
+			connectiRole: "App Developer",
 			connectiPeriod: "May 2024 – Present",
 			connecti:
-				"Yeoldal app (550K signups, 100K MAU): development, performance, and stability",
+				"Yeoldal domestic and global apps (550K signups, 100K MAU): push, deep links, versioning, releases, error response, and new features",
 			biskitCompany: "Biskit",
-			biskitRole: "Frontend Developer",
+			biskitRole: "App/Web Developer (Associate Research Engineer)",
 			biskitPeriod: "Apr 2022 – Oct 2023",
-			biskit: "Pet IoT app and ops admin (RBAC, Excel integration, etc.)",
+			biskit:
+				"Six projects, including the Pethroom Care app and admin and the Findirect inspection framework (Swift); chart-heavy admin and app work",
 			univCompany: "Suwon University",
 			univ: "B.A. in Global Business",
 			univPeriod: "Mar 2010 – Mar 2018",
 			exchange:
-				"Exchange at Ming Chuan University, Taiwan (1 year)—adaptability for global services",
+				"Exchange student at Ming Chuan University, Taiwan, for two semesters (Jun 2016 – Jun 2017); global business courses taught in English",
 			globalTitle: "Global competence",
 			globalDesc:
-				"Business English and ownership of global-version features and maintenance.",
+				"TOEIC 905; one-year working holiday in Australia (Sep 2014 – Aug 2015). I turn global-app localization requirements into dev specs, and demoed the service to overseas users and buyers at a COEX expo booth.",
 			extraTitle: "Diligence & responsibility",
 			extraDesc:
-				"2nd of 500 at 30th Division training; brigade commander's commendation.",
+				"2nd of 500 at 30th Division training; division commander's commendation.",
 		},
 		footer: {
 			built: "Designed & Built by Heeun Lee © 2026",
